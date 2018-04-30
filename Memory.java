@@ -20,6 +20,10 @@ public class Memory {
 			code[2*i+1]=0;
 		}
 	}
+	public void setCode(int index, int op, int arg) {
+		code[2*index] = op;
+		code[2*index+1] = arg;
+	}
 
 
 }
