@@ -7,8 +7,15 @@ public class Memory {
 	private int[] code = new int[CODE_MAX];
 	private int changedIndex = -1;
 	
+	
+	public int getData (int index) {
+		return data[index];
+	}
 	public int[] getCode() {
 		return code;
+	}
+	public int[] getData() {
+		return data;
 	}
 	public int getOp(int i) {
 		return code[2*i];
@@ -33,7 +40,7 @@ public class Memory {
 	}
 	public void clearData(int start, int end) {
 		changedIndex = -1;
-		for(int i = 0; start <= i < end; i++) {
+		for(int i = start; i < end; i++) {
 			data[i] = 0;
 		}
 	}

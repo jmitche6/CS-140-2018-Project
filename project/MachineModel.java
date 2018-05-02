@@ -9,6 +9,8 @@ public class MachineModel {
 	private Memory mem = new Memory();
 	private HaltCallBack callback;
 	private boolean withGUI;
+	private Job[] jobs = new Job[2];
+	private Job currentJob;
 	
 	public MachineModel() {
 		this(false, null);
@@ -220,9 +222,54 @@ public class MachineModel {
 			cpu.incrementIP();
 		});
 		
+		INSTRUCTIONS.put(29, arg -> {
+			int arg1 = memory.getData(cpu.memoryBase+arg);
+			cpu.instructionPointer = currentJob.getStartcodeIndex() + arg1;
+		});
+		
 		INSTRUCTIONS.put(0x1F, arg -> {
 			callback.halt();
 		});
+	}
+	
+	public Job getCurrentJob() {
+		return currentJob;
+	}
+	
+	public void setJob(int i) {
+		if (i != 0 && i != 1) {
+			throw new IllegalArgumentException();
+		}
+		currentJob.setCurrentAcc(cpu.accumulator);
+		currentJob.setCurrentIP(cpu.instructionPointer);
+		jobs[i] = currentJob;
+		cpu.accumulator = currentJob.getCurrentAcc();
+		cpu.instructionPointer = currentJob.getCurrentIP();
+		cpu.memoryBase = currentJob.getStartmemoryIndex();
+	}
+
+	public int[] getData() {
+		return mem.getData();
+	}
+	
+	public int getData (int index) {
+		return mem.getData(index);
+	}
+	
+	public void setData(int index, int value) {
+		mem.setData(index, value);
+	}
+	
+	public int getOp(int i) {
+		return mem.getOp(i);
+	}
+	
+	public int getArg(int i) {
+		return mem.getArg(i);
+	}
+	
+	public void setCode(int index, int op, int arg) {
+		mem.setCode(index, op, arg);
 	}
 	
 	private class CPU {
