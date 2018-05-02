@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.Scanner;
 
 public class Loader {
-	public static String load(MachineModel model, File file, int codeOffset) {
+	public static String load(MachineModel model, File file, int codeOffset, int memoryOffset) {
 		int codeSize = 0;
 		if(model.equals(null) || file.equals(null)) {
 			return null;
@@ -27,9 +27,11 @@ public class Loader {
 				}
 				if(inCode == false) {
 					int value = parser.nextInt();
-					//model.setData(next+memoryOffset, value);
+					model.setData(next+memoryOffset, value);
 				}
+				parser.close();
 			}
+			input.close();
 			return "" + codeSize;
 		} catch(ArrayIndexOutOfBoundsException e) {
 			return "Array Index " + e.getMessage();
