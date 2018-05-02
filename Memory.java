@@ -7,7 +7,7 @@ public class Memory {
 	private int[] code = new int[CODE_MAX];
 	private int changedIndex = -1;
 	
-	int[] getCode() {
+	public int[] getCode() {
 		return code;
 	}
 	public int getOp(int i) {
@@ -18,6 +18,12 @@ public class Memory {
 	}
 	public int getChangedIndex() {
 		return changedIndex;
+	}
+	public String getHex(int i) {
+		return "" + Integer.toHexString(code[2*i]).toUpperCase() + " " + Integer.toHexString(code[2*i+1]).toUpperCase();
+	}
+	public String getDecimal(int i) {
+		return "" + InstrMap.toMnemonic.get(code[2*i]) + " " + code[2*i+1];
 	}
 	public void clear(int start, int end) {
 		for(int i = start; i < end; i++) {
