@@ -22,7 +22,7 @@ public class Loader {
 				}
 				if(inCode == true && next != -1) {
 					int arg = parser.nextInt();
-					//model.setCode(next, arg, codeOffset+codeSize);
+					model.setCode(codeOffset+codeSize, next, arg);
 					codeSize += 1;
 				}
 				if(inCode == false) {
