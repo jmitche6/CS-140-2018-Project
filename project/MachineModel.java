@@ -275,6 +275,38 @@ public class MachineModel {
 		mem.setCode(index, op, arg);
 	}
 	
+	public int getChangedIndex() {
+		mem.getChangedIndex();
+	}
+	
+	public int getInstructionPointer() {
+		return cpu.instructionPointer;
+	}
+	
+	public int getAccumulator() {
+		return cpu.accumulator;
+	}
+	
+	public int getMemoryBase() {
+		return cpu.memoryBase;
+	}
+	
+	public void setInstructionPointer(int i) {
+		cpu.instructionPointer = i;
+	}
+	
+	public void setAccumulator(int i) {
+		cpu.accumulator = i;
+	}
+	
+	public void setMemoryBase(int i) {
+		cpu.memoryBase = i;
+	}
+	
+	public Instruction get(int key) {
+		INSTRUCTIONS.get(key);
+	}
+	
 	private class CPU {
 		private int accumulator;
 		private int instructionPointer;
