@@ -63,7 +63,8 @@ public class MachineModel {
 		});
 		
 		INSTRUCTIONS.put(0x8, arg -> {
-			cpu.instructionPointer = arg;
+			//cpu.instructionPointer = arg;
+			cpu.instructionPointer = currentJob.getStartcodeIndex() + arg;
 		});
 		
 		INSTRUCTIONS.put(0x9, arg -> {
@@ -84,9 +85,11 @@ public class MachineModel {
 		
 		INSTRUCTIONS.put(0xB, arg -> {
 			if (cpu.accumulator == 0) {
-				cpu.instructionPointer = arg;
+				//cpu.instructionPointer = arg;
+				cup.instructionPointer = currentJob.getStartcodeIndex() + arg;
 			} else {
-				cpu.incrementIP();
+				//cpu.incrementIP();
+				cpu.incrementIP(1);
 			}
 		});
 		
