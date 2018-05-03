@@ -4,7 +4,7 @@ import javafx.beans.Observable;
 
 import javax.swing.JFrame;
 
-public class ViewMediator extends Observable {
+public class ViewMediator implements Observable {
     private MachineModel model;
     private JFrame frame;
     public void step() {
@@ -22,4 +22,11 @@ public class ViewMediator extends Observable {
     public void setModel(MachineModel model) {
         this.model = model;
     }
+    public void clearJob(){
+
+    }
+    public void makeReady(String s){
+
+    }
+
 }

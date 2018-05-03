@@ -4,6 +4,8 @@ import java.io.*;
 import java.util.Properties;
 
 import project.Assembler;
+import project.Job;
+import project.Loader;
 import project.MachineModel;
 
 import javax.swing.*;
@@ -187,6 +189,24 @@ public class FilesManager {
         }
         finalLoad_ReloadStep(job);
     }
-    
+    void finalLoad_ReloadStep(Job job) {
+        view.clearJob();
+        String str = Loader.load(model, currentlyExecutingFile,
+                job.getStartcodeIndex(), job.getStartmemoryIndex());
+        try {
+            int len = Integer.parseInt(str);
+            job.setCodeSize(len);
+            view.makeReady("Load Code");
+
+        } catch (NumberFormatException e ) {
+            JOptionPane.showMessageDialog(
+                    view.getFrame(),
+                    "The file being selected has problems.\n" +
+                            str + "\n" +
+                            "Cannot load the program",
+                    "Warning",
+                    JOptionPane.OK_OPTION);
+        }
+    }
 
 }
