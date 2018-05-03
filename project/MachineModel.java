@@ -250,6 +250,14 @@ public class MachineModel {
 		cpu.instructionPointer = currentJob.getCurrentIP();
 		cpu.memoryBase = currentJob.getStartmemoryIndex();
 	}
+	
+	public States getCurrentState() {
+		return currentJob.getCurrentState();
+	}
+	
+	public void setCurrentState(States currentState) {
+		currentJob.setCurrentState(currentState);
+	}
 
 	public int[] getData() {
 		return mem.getData();
@@ -260,7 +268,7 @@ public class MachineModel {
 	}
 	
 	public void setData(int index, int value) {
-		mem.setData(index, value);
+		return mem.setData(index, value);
 	}
 	
 	public int getOp(int i) {
@@ -275,8 +283,12 @@ public class MachineModel {
 		mem.setCode(index, op, arg);
 	}
 	
+	public int[] getCode() {
+		return mem.getCode();
+	}
+	
 	public int getChangedIndex() {
-		mem.getChangedIndex();
+		return mem.getChangedIndex();
 	}
 	
 	public int getInstructionPointer() {
@@ -305,6 +317,14 @@ public class MachineModel {
 	
 	public Instruction get(int key) {
 		INSTRUCTIONS.get(key);
+	}
+	
+	public void step() {
+		
+	}
+	
+	public void clearJob() {
+		
 	}
 	
 	private class CPU {
