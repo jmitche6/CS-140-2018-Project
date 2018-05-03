@@ -2,6 +2,8 @@ package project;
 
 import java.io.File;
 import java.util.Scanner;
+import java.io.FileNotFoundException;
+import java.util.NoSuchElementException;
 
 public class Loader {
 	public static String load(MachineModel model, File file, int codeOffset, int memoryOffset) {
