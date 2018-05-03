@@ -2,6 +2,7 @@ package project;
 
 import java.util.Map;
 import java.util.TreeMap;
+import projectview.States;
 
 public class MachineModel {
 	public static final Map<Integer, Instruction> INSTRUCTIONS = new TreeMap<>();
