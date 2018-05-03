@@ -1,6 +1,6 @@
 package projectview;
 import project.MachineModel;
-import javafx.beans.Observable;
+import java.util.Observable;
 
 import javax.swing.JFrame;
 
