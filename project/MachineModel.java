@@ -86,7 +86,7 @@ public class MachineModel {
 		INSTRUCTIONS.put(0xB, arg -> {
 			if (cpu.accumulator == 0) {
 				//cpu.instructionPointer = arg;
-				cup.instructionPointer = currentJob.getStartcodeIndex() + arg;
+				cpu.instructionPointer = currentJob.getStartcodeIndex() + arg;
 			} else {
 				//cpu.incrementIP();
 				cpu.incrementIP(1);
@@ -226,7 +226,7 @@ public class MachineModel {
 		});
 		
 		INSTRUCTIONS.put(29, arg -> {
-			int arg1 = memory.getData(cpu.memoryBase+arg);
+			int arg1 = mem.getData(cpu.memoryBase+arg);
 			cpu.instructionPointer = currentJob.getStartcodeIndex() + arg1;
 		});
 		
@@ -268,7 +268,7 @@ public class MachineModel {
 	}
 	
 	public void setData(int index, int value) {
-		return mem.setData(index, value);
+		mem.setData(index, value);
 	}
 	
 	public int getOp(int i) {
@@ -316,14 +316,14 @@ public class MachineModel {
 	}
 	
 	public Instruction get(int key) {
-		INSTRUCTIONS.get(key);
+		return INSTRUCTIONS.get(key);
 	}
 	
 	public void step() {
 		try {
 			int ip = getInstructionPointer();
 			if(currentJob.getStartcodeIndex() > ip || ip >= currentJob.getStartcodeIndex()+currentJob.getCodeSize()) {
-				throw CodeAccessException;
+				throw new CodeAccessException();
 			}
 			get(getOp(ip)).execute(getArg(ip));
 		} catch(Exception e) {
