@@ -320,11 +320,23 @@ public class MachineModel {
 	}
 	
 	public void step() {
-		
+		try {
+			int ip = getInstructionPointer();
+			if(currentJob.getStartcodeIndex() > ip || ip >= currentJob.getStartcodeIndex()+currentJob.getCodeSize()) {
+				throw CodeAccessException;
+			}
+			get(getOp(ip)).execute(getArg(ip));
+		} catch(Exception e) {
+			callback.halt();
+			throw e;
 	}
 	
 	public void clearJob() {
-		
+		mem.clearData(currentJob.getStartmemoryIndex(), currentJob.getStartmemoryIndex()+mem.DATA_SIZE/2);
+		mem.clearCode(currentJob.getStartcodeIndex(), currentJob.getStartcodeIndex()+currentJob.getCodeSize());
+		setAccumulator(0);
+		setInstructionPointer(currentJob.getStartcodeIndex());
+		currentJob.reset();
 	}
 	
 	private class CPU {
