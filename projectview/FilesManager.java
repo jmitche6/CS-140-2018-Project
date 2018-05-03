@@ -20,12 +20,10 @@ public class FilesManager {
     private Properties properties = null; // Java method for persistent program properties
     private File currentlyExecutingFile = null;
 
-    public void setView(ViewMediator view) {
-        this.view = view;
-    }
+    public FilesManager(ViewMediator v){
+        this.view = v;
+        model = view.getModel();
 
-    public MachineModel getModel() {
-       return  view.getModel();
     }
     public void initialize(){
         locateDefaultDirectory();
