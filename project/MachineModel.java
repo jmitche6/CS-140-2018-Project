@@ -292,6 +292,14 @@ public class MachineModel {
 		return mem.getChangedIndex();
 	}
 	
+	public String getHex(int i) {
+		return mem.getHex(i);
+	}
+	
+	public String getDecimal(int i) {
+		return mem.getDecimal(i);
+	}
+	
 	public int getInstructionPointer() {
 		return cpu.instructionPointer;
 	}
@@ -334,7 +342,7 @@ public class MachineModel {
 	}
 	
 	public void clearJob() {
-		mem.clearData(currentJob.getStartmemoryIndex(), currentJob.getStartmemoryIndex()+mem.DATA_SIZE/2);
+		mem.clearData(currentJob.getStartmemoryIndex(), currentJob.getStartmemoryIndex()+Memory.DATA_SIZE/2);
 		mem.clearCode(currentJob.getStartcodeIndex(), currentJob.getStartcodeIndex()+currentJob.getCodeSize());
 		setAccumulator(0);
 		setInstructionPointer(currentJob.getStartcodeIndex());

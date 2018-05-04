@@ -1,6 +1,7 @@
 package projectview;
 
 import java.awt.*;
+import java.util.Observable;
 import java.util.Observer;
 import project.MachineModel;
 import project.Memory;
@@ -9,6 +10,7 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
+@SuppressWarnings("deprecation")
 public class CodeViewPanel implements Observer {
     private MachineModel model;
     private JScrollPane scroller;
@@ -20,9 +22,9 @@ public class CodeViewPanel implements Observer {
     public CodeViewPanel(ViewMediator gui, MachineModel mdl){
         gui.addObserver(this);
         this.model = mdl;
-
-
     }
+    
+    
     public JComponent createCodeDisplay(){
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
@@ -54,6 +56,58 @@ public class CodeViewPanel implements Observer {
         return panel;
     }
 
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		if(arg1 != null && arg1.equals("Load Code")) {
+			int offset = model.getCurrentJob().getStartcodeIndex();
+			System.out.println("CODE SIZE " +  model.getCurrentJob().getCodeSize());
+			for(int i = offset; 
+					i < offset + model.getCurrentJob().getCodeSize(); i++) {
+				System.out.println("CODE SIZE " +  model.getCurrentJob().getCodeSize());
+				codeHex[i].setText(model.getHex(i));
+				codeDecimal[i].setText(model.getDecimal(i));
+			}	
+			previousColor = model.getInstructionPointer();			
+			codeHex[previousColor].setBackground(Color.YELLOW);
+			codeDecimal[previousColor].setBackground(Color.YELLOW);
+		} else if(arg1 != null && arg1.equals("Clear")) {
+			int offset = model.getCurrentJob().getStartcodeIndex();
+			for(int i = offset; 
+					i < offset + model.getCurrentJob().getCodeSize(); i++) {
+				if(model == null) {
+					codeHex[i].setText("");
+					codeDecimal[i].setText("");
+				}
+				else {
+					codeHex[i].setText(model.getHex(i));
+					codeDecimal[i].setText(model.getDecimal(i));
+				}
+			}	
+			if(previousColor >= 0 && previousColor < Memory.CODE_MAX/2) {
+				codeHex[previousColor].setBackground(Color.WHITE);
+				codeDecimal[previousColor].setBackground(Color.WHITE);
+			}
+			previousColor = -1;
+		}		
+		if(this.previousColor >= 0 && previousColor < Memory.CODE_MAX/2) {
+			codeHex[previousColor].setBackground(Color.WHITE);
+			codeDecimal[previousColor].setBackground(Color.WHITE);
+		}
+		previousColor = model.getInstructionPointer();
+		if(this.previousColor >= 0 && previousColor < Memory.CODE_MAX/2) {
+			codeHex[previousColor].setBackground(Color.YELLOW);
+			codeDecimal[previousColor].setBackground(Color.YELLOW);
+		} 
 
+		if(scroller != null && model != null && model!= null) {
+			JScrollBar bar= scroller.getVerticalScrollBar();
+			int pc = model.getInstructionPointer();
+			//CHANGE
+			if(pc > 0 && pc < Memory.CODE_MAX && codeHex[pc] != null) {
+				Rectangle bounds = codeHex[pc].getBounds();
+				bar.setValue(Math.max(0, bounds.y - 15*bounds.height));
+			}
+		}
+	}
 
 }

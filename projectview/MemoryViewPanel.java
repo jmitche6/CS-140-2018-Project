@@ -21,6 +21,7 @@ import javax.swing.border.TitledBorder;
 import project.MachineModel;
 import project.Loader;
 
+@SuppressWarnings("deprecation")
 public class MemoryViewPanel implements Observer {
     private MachineModel model;
     private JScrollPane scroller;
