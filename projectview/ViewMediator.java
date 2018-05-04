@@ -1,5 +1,6 @@
 package projectview;
 import project.CodeAccessException;
+import project.DivideByZeroException;
 import project.MachineModel;
 import project.Memory;
 
@@ -79,14 +80,112 @@ public class ViewMediator extends Observable {
                         JOptionPane.OK_OPTION);
             }
             //TODO add other exceptions
-            catch (ArrayIndexOutOfBoundsException){
-                System.out.println();
+            catch (ArrayIndexOutOfBoundsException e){
+                JOptionPane.showMessageDialog(
+                        frame,
+                        " Illegal access to data from line " + model.getInstructionPointer() + "\n"
+                                + "Exception message: " + e.getMessage(),
+                        "Run time error",
+                        JOptionPane.OK_OPTION);
 
 
             }
+            catch (NullPointerException e){
+                JOptionPane.showMessageDialog(
+                        frame,
+                        " Illegal access to data from line " + model.getInstructionPointer() + "\n"
+                                + "Exception message: " + e.getMessage(),
+                        "NullPOinterException",
+                        JOptionPane.OK_OPTION);
+
+
+            }
+            catch (IllegalArgumentException e){
+                JOptionPane.showMessageDialog(
+                        frame,
+                        " Illegal access to data from line " + model.getInstructionPointer() + "\n"
+                                + "Exception message: " + e.getMessage(),
+                        "Program Error",
+                        JOptionPane.OK_OPTION);
+
+
+            }
+            catch (DivideByZeroException e){
+                JOptionPane.showMessageDialog(
+                        frame,
+                        " Illegal access to data from line " + model.getInstructionPointer() + "\n"
+                                + "Exception message: " + e.getMessage(),
+                        "Divide by Zero",
+                        JOptionPane.OK_OPTION);
+
+
+            }
+
+
             setChanged();
             notifyObservers();
         }
+    }
+    public void execute() {
+        while (model.getCurrentState() != States.PROGRAM_HALTED && model.getCurrentState() != States.NOTHING_LOADED) {
+
+            try{
+                model.step();
+            } catch (CodeAccessException e) { // import project.CodeAccessException at the start of the class
+                JOptionPane.showMessageDialog(
+                        frame,
+                        "Illegal access to code from line " + model.getInstructionPointer() + "\n"
+                                + "Exception message: " + e.getMessage(),
+                        "Run time error",
+                        JOptionPane.OK_OPTION);
+            }
+
+            catch (ArrayIndexOutOfBoundsException e){
+                JOptionPane.showMessageDialog(
+                        frame,
+                        " Illegal access to data from line " + model.getInstructionPointer() + "\n"
+                                + "Exception message: " + e.getMessage(),
+                        "Run time error",
+                        JOptionPane.OK_OPTION);
+
+
+            }
+            catch (NullPointerException e){
+                JOptionPane.showMessageDialog(
+                        frame,
+                        " Illegal access to data from line " + model.getInstructionPointer() + "\n"
+                                + "Exception message: " + e.getMessage(),
+                        "NullPOinterException",
+                        JOptionPane.OK_OPTION);
+
+
+            }
+            catch (IllegalArgumentException e){
+                JOptionPane.showMessageDialog(
+                        frame,
+                        " Illegal access to data from line " + model.getInstructionPointer() + "\n"
+                                + "Exception message: " + e.getMessage(),
+                        "Program Error",
+                        JOptionPane.OK_OPTION);
+
+
+            }
+            catch (DivideByZeroException e){
+                JOptionPane.showMessageDialog(
+                        frame,
+                        " Illegal access to data from line " + model.getInstructionPointer() + "\n"
+                                + "Exception message: " + e.getMessage(),
+                        "Divide by Zero",
+                        JOptionPane.OK_OPTION);
+
+
+            }
+
+
+
+        }
+        setChanged();
+        notifyObservers();
     }
 
     public JFrame getFrame() {
