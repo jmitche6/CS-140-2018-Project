@@ -323,13 +323,14 @@ public class MachineModel {
 	public void step() {
 		try {
 			int ip = getInstructionPointer();
-			if(currentJob.getStartcodeIndex() > ip || ip >= currentJob.getStartcodeIndex()+currentJob.getCodeSize()) {
+			if (currentJob.getStartcodeIndex() > ip || ip >= currentJob.getStartcodeIndex() + currentJob.getCodeSize()) {
 				throw new CodeAccessException();
 			}
 			get(getOp(ip)).execute(getArg(ip));
-		} catch(Exception e) {
+		} catch (Exception e) {
 			callback.halt();
 			throw e;
+		}
 	}
 	
 	public void clearJob() {
@@ -339,8 +340,9 @@ public class MachineModel {
 		setInstructionPointer(currentJob.getStartcodeIndex());
 		currentJob.reset();
 	}
+
 	
-	private class CPU {
+	 private class CPU {
 		private int accumulator;
 		private int instructionPointer;
 		private int memoryBase;

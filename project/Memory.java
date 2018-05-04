@@ -32,7 +32,7 @@ public class Memory {
 	public String getDecimal(int i) {
 		return "" + InstrMap.toMnemonic.get(code[2*i]) + " " + code[2*i+1];
 	}
-	public void clear(int start, int end) {
+	public void clearCode(int start, int end) {
 		for(int i = start; i < end; i++) {
 			code[2*i]=0;
 			code[2*i+1]=0;
