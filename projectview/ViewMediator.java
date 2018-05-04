@@ -17,7 +17,7 @@ public class ViewMediator extends Observable {
     private MemoryViewPanel memoryViewPanel3;
     //private ControlPanel controlPanel;
 //private ProcessorViewPanel processorPanel;
-//private MenuBarBuilder menuBuilder;
+    private MenuBarBuilder menuBuilder;
     private JFrame frame;
     private FilesManager filesManager;
     private Animator animator;
@@ -30,7 +30,7 @@ public class ViewMediator extends Observable {
         memoryViewPanel3 = new MemoryViewPanel(this, model, Memory.DATA_SIZE/2, Memory.DATA_SIZE);
         //controlPanel = new ControlPanel(this);
         //processorPanel = new ProcessorPanel(this,model);
-        //menuBuilder = new MenuBarBuilder(this);
+        menuBuilder = new MenuBarBuilder(this);
         frame = new JFrame("Simulator");
         Container content = frame.getContentPane();
         content.setLayout(new BorderLayout(1,1));
@@ -39,8 +39,15 @@ public class ViewMediator extends Observable {
         JPanel center = new JPanel();
         center.setLayout(new GridLayout(1, 3));
         frame.add(codeViewPanel.createCodeDisplay(),BorderLayout.LINE_START);
-        center.add(memoryViewPanel1.createMemoryDisplay(), memoryViewPanel2.createMemoryDisplay(), memoryViewPanel3.createMemoryDisplay());
-        frame.add(center);
+        center.add(memoryViewPanel1.createMemoryDisplay());
+        center.add(memoryViewPanel2.createMemoryDisplay());
+        center.add(memoryViewPanel3.createMemoryDisplay());
+        JMenuBar bar = new JMenuBar();
+        frame.setJMenuBar(bar);
+        bar.add(menuBuilder.createFileMenu());
+        bar.add(menuBuilder.createExecuteMenu());
+        bar.add(menuBuilder.createJobsMenu());
+        frame.add(center, BorderLayout.CENTER);
         //TODO return HERE for the other GUI components.
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //TODO return HERE for other setup details
