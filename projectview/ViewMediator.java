@@ -15,8 +15,8 @@ public class ViewMediator extends Observable {
     private MemoryViewPanel memoryViewPanel1;
     private MemoryViewPanel memoryViewPanel2;
     private MemoryViewPanel memoryViewPanel3;
-    //private ControlPanel controlPanel;
-//private ProcessorViewPanel processorPanel;
+    private ControlPanel controlPanel;
+    private ProcessorViewPanel processorPanel;
     private MenuBarBuilder menuBuilder;
     private JFrame frame;
     private FilesManager filesManager;
@@ -28,8 +28,8 @@ public class ViewMediator extends Observable {
         memoryViewPanel1 = new MemoryViewPanel(this, model, 0, 240);
         memoryViewPanel2 = new MemoryViewPanel(this, model, 240, Memory.DATA_SIZE/2);
         memoryViewPanel3 = new MemoryViewPanel(this, model, Memory.DATA_SIZE/2, Memory.DATA_SIZE);
-        //controlPanel = new ControlPanel(this);
-        //processorPanel = new ProcessorPanel(this,model);
+        controlPanel = new ControlPanel(this);
+        processorPanel = new ProcessorPanel(this,model);
         menuBuilder = new MenuBarBuilder(this);
         frame = new JFrame("Simulator");
         Container content = frame.getContentPane();
@@ -42,15 +42,15 @@ public class ViewMediator extends Observable {
         center.add(memoryViewPanel1.createMemoryDisplay());
         center.add(memoryViewPanel2.createMemoryDisplay());
         center.add(memoryViewPanel3.createMemoryDisplay());
+        frame.add(controlPanel.createControlDisplay(),BorderLayout.PAGE_END);
+        frame.add(processorPanel.createProcessorDisplay(),BorderLayout.PAGE_START);
         JMenuBar bar = new JMenuBar();
         frame.setJMenuBar(bar);
         bar.add(menuBuilder.createFileMenu());
         bar.add(menuBuilder.createExecuteMenu());
         bar.add(menuBuilder.createJobsMenu());
         frame.add(center, BorderLayout.CENTER);
-        //TODO return HERE for the other GUI components.
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //TODO return HERE for other setup details
         frame.setVisible(true);
     }
     public States getCurrentState(){
@@ -261,8 +261,8 @@ public class ViewMediator extends Observable {
             public void run() {
                 ViewMediator mediator = new ViewMediator();
                 MachineModel model = new MachineModel(
-                        //true,
-                        //() -> mediator.setCurrentState(States.PROGRAM_HALTED)
+                        true,
+                        () -> mediator.setCurrentState(States.PROGRAM_HALTED)
                 );
                 mediator.setModel(model);
                 mediator.createAndShowGUI();
