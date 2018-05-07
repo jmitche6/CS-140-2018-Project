@@ -66,7 +66,9 @@ public class FullAssembler implements Assembler {
 					int address = Integer.parseInt(parts[0],16);
 				}
 				addressError = false;
-				int arg = Integer.parseInt(parts[1],16);
+				if(parts.length == 2) {
+					int arg = Integer.parseInt(parts[1],16);	
+				}
 				if (inCode) {
 					codeInput.add(line);	
 				} else {

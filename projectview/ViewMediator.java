@@ -24,6 +24,7 @@ public class ViewMediator extends Observable {
     private void createAndShowGUI(){
         animator = new Animator(this);
         filesManager = new FilesManager(this);
+        filesManager.initialize();
         codeViewPanel = new CodeViewPanel(this, model);
         memoryViewPanel1 = new MemoryViewPanel(this, model, 0, 240);
         memoryViewPanel2 = new MemoryViewPanel(this, model, 240, Memory.DATA_SIZE/2);

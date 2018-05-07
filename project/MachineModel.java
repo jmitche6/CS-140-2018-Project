@@ -226,7 +226,7 @@ public class MachineModel {
 			cpu.incrementIP();
 		});
 		
-		INSTRUCTIONS.put(29, arg -> {
+		INSTRUCTIONS.put(0x1D, arg -> {
 			int arg1 = mem.getData(cpu.memoryBase+arg);
 			cpu.instructionPointer = currentJob.getStartcodeIndex() + arg1;
 		});
@@ -234,6 +234,16 @@ public class MachineModel {
 		INSTRUCTIONS.put(0x1F, arg -> {
 			callback.halt();
 		});
+		
+		jobs[0] = new Job();
+		jobs[1] = new Job();
+		currentJob = jobs[0];
+		jobs[0].setStartcodeIndex(0);
+		jobs[0].setStartmemoryIndex(0);
+		jobs[0].setCurrentState(States.NOTHING_LOADED);
+		jobs[1].setStartcodeIndex(Memory.CODE_MAX/4);
+		jobs[1].setStartmemoryIndex(Memory.DATA_SIZE/2);
+		jobs[1].setCurrentState(States.NOTHING_LOADED);
 	}
 	
 	public Job getCurrentJob() {
