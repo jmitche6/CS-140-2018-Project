@@ -74,7 +74,7 @@ public class CodeViewPanel implements Observer {
 			int offset = model.getCurrentJob().getStartcodeIndex();
 			for(int i = offset; 
 					i < offset + model.getCurrentJob().getCodeSize(); i++) {
-				if(model == null) {
+				if(model != null) {
 					codeHex[i].setText("");
 					codeDecimal[i].setText("");
 				}

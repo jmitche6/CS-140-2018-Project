@@ -46,7 +46,6 @@ public class Job {
 		this.currentIP = currentIP;
 	}
 	public void reset() {
-		codeSize = 0;
 		currentState = States.NOTHING_LOADED;
 		currentAcc = 0;
 		currentIP = startcodeIndex;

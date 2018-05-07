@@ -39,7 +39,7 @@ public class MenuBarBuilder implements Observer {
 		menu.addSeparator();
 		exit.setMnemonic(KeyEvent.VK_E);
 		exit.setAccelerator(KeyStroke.getKeyStroke(
-				KeyEvent.VK_A, ActionEvent.CTRL_MASK));
+				KeyEvent.VK_E, ActionEvent.CTRL_MASK));
 		exit.addActionListener(e -> view.exit());
 		menu.add(exit);
 		return menu;

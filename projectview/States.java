@@ -20,8 +20,8 @@ public enum States {
 			states[CLEAR] = false;
 			states[LOAD] = true;
 			states[RELOAD] = false;
-			states[RUN] = true;
-			states[RUNNING] = true;
+			states[RUN] = false;
+			states[RUNNING] = false;
 			states[STEP] = false;
 			states[CHANGE_JOB] = true;
 		}
@@ -64,9 +64,12 @@ public enum States {
 		return states[ASSEMBLE];
 	}
 	public boolean getClearActive() {
-		return states[LOAD];
+		return states[CLEAR];
 	}
 	public boolean getLoadFileActive() {
+		return states[LOAD];
+	}
+	public boolean getReloadActive() {
 		return states[RELOAD];
 	}
 	public boolean getRunningActive() {

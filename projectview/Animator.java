@@ -18,7 +18,7 @@ public class Animator {
             autoStepOn = false;
         }
         else{
-            autoStepOn= true;
+            autoStepOn = true;
         }
     }
     public void setPeriod(int period){

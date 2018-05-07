@@ -53,6 +53,12 @@ public class ViewMediator extends Observable {
         frame.add(center, BorderLayout.CENTER);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+        model.setCurrentState(States.NOTHING_LOADED);
+        animator.start();
+        model.getCurrentState().enter();
+        setChanged();
+        notifyObservers();
+        
     }
     public States getCurrentState(){
         return model.getCurrentState();
@@ -226,11 +232,11 @@ public class ViewMediator extends Observable {
         this.model = model;
     }
     public void clearJob(){
-        model.clearJob();
         model.setCurrentState(States.NOTHING_LOADED);
         model.getCurrentState().enter();
         setChanged();
         notifyObservers("Clear");
+        model.clearJob();
     }
     public void toggleAutoStep(){
         animator.toggleAutoStep();

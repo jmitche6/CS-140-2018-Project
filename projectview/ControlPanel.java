@@ -49,7 +49,7 @@ public class ControlPanel implements Observer {
 		stepButton.setEnabled(view.getCurrentState().getStepActive());
 		clearButton.setEnabled(view.getCurrentState().getClearActive());
 		runButton.setEnabled(view.getCurrentState().getRunPauseActive());
-		reloadButton.setEnabled(view.getCurrentState().getLoadFileActive());
+		reloadButton.setEnabled(view.getCurrentState().getReloadActive());
 
 	}
 

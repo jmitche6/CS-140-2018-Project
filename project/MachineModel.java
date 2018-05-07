@@ -354,9 +354,9 @@ public class MachineModel {
 	public void clearJob() {
 		mem.clearData(currentJob.getStartmemoryIndex(), currentJob.getStartmemoryIndex()+Memory.DATA_SIZE/2);
 		mem.clearCode(currentJob.getStartcodeIndex(), currentJob.getStartcodeIndex()+currentJob.getCodeSize());
+		currentJob.reset();
 		setAccumulator(0);
 		setInstructionPointer(currentJob.getStartcodeIndex());
-		currentJob.reset();
 	}
 
 	
