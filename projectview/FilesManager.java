@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.Properties;
 
 import project.Assembler;
+import project.FullAssembler;
 import project.Job;
 import project.Loader;
 import project.MachineModel;
