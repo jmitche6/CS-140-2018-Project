@@ -22,12 +22,12 @@ public class Loader {
 				if(inCode == true && next == -1) {
 					inCode = false;
 				}
-				if(inCode == true && next != -1) {
+				else if(inCode == true && next != -1) {
 					int arg = parser.nextInt();
 					model.setCode(codeOffset+codeSize, next, arg);
 					codeSize += 1;
 				}
-				if(inCode == false) {
+				else if(inCode == false) {
 					int value = parser.nextInt();
 					model.setData(next+memoryOffset, value);
 				}
