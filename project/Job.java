@@ -34,7 +34,6 @@ public class Job {
 		this.codeSize = codeSize;
 	}
 	public int getStartmemoryIndex() {
-		System.out.println(startmemoryIndex);
 		return startmemoryIndex;
 	}
 	public void setStartmemoryIndex(int startmemoryIndex) {

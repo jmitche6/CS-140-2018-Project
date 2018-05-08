@@ -50,8 +50,6 @@ public class Memory {
 	}
 	public void setData(int index, int value) {
 		//changedIndex = index;
-		System.out.println("Passed Index: " + index);
-		System.out.println("Passed Value: " + value);
 		data[index] = value;
 	}
 

@@ -234,9 +234,9 @@ public class ViewMediator extends Observable {
     public void clearJob(){
         model.setCurrentState(States.NOTHING_LOADED);
         model.getCurrentState().enter();
+        model.clearJob();
         setChanged();
         notifyObservers("Clear");
-        model.clearJob();
     }
     public void toggleAutoStep(){
         animator.toggleAutoStep();

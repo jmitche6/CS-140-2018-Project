@@ -158,21 +158,22 @@ public class MachineModel {
         });
 		
 		INSTRUCTIONS.put(0x16, arg -> {
-			if (arg == 0) {
+            int arg1 = mem.getData(cpu.memoryBase+arg);
+            if (arg1 == 0) {
             	throw new DivideByZeroException("Cannot Divide By 0!");
             } else {
-            int arg1 = mem.getData(cpu.memoryBase+arg);
             cpu.accumulator /= arg1;
             cpu.incrementIP();
             }
         });
 		
 		INSTRUCTIONS.put(0x17, arg -> {
-			if (arg == 0) {
-            	throw new DivideByZeroException("Cannot Divide By 0!");
-            } else {
+			
             int arg1 = mem.getData(cpu.memoryBase+arg);
             int arg2 = mem.getData(cpu.memoryBase+arg1);
+            if (arg2 == 0 ) {
+            	throw new DivideByZeroException("Cannot Divide By 0!");
+            } else {
             cpu.accumulator /= arg2;
             cpu.incrementIP();
             }
