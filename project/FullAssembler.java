@@ -44,6 +44,7 @@ public class FullAssembler implements Assembler {
 					blankFound = false;
 				} if((Character.toString(line.charAt(0)).equals(" ") || Character.toString(line.charAt(0)).equals("\t"))) {
 					error.append("Line " + lineNum + " starts with illegal white space" + "\n");
+					retVal = lineNum;
 				} if (line.trim().toUpperCase().equals("DATA") && inCode) {
 					if (!line.trim().equals("DATA")) {
 						error.append("DATA must be uppercase at Line " + lineNum + "\n");
@@ -99,17 +100,7 @@ public class FullAssembler implements Assembler {
 					dataInput.add(line);
 				}
 			} IN.close();
-		} /*catch(NumberFormatException e) {
-			if(!inCode && addressError) {
-				error.append("\nError on line " + lineNum + 
-						": address is not a hex number");
-				retVal = lineNum;
-			} else {
-				error.append("\nError on line " + lineNum + 
-						": argument is not a hex number");
-			}
-		}	retVal = lineNum;	
-		}*/ catch (FileNotFoundException e) {
+		} catch (FileNotFoundException e) {
 			error.append("\nError: Unable to write the assembled program to the output file");
 			retVal = -1;
 		} catch (IOException e) {

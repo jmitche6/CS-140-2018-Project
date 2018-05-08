@@ -49,7 +49,10 @@ public class Memory {
 		code[2*index+1] = arg;
 	}
 	public void setData(int index, int value) {
-		changedIndex = index;
+		//changedIndex = index;
+		System.out.println("Passed Index: " + index);
+		System.out.println("Passed Value: " + value);
+		data[index] = value;
 	}
 
 }

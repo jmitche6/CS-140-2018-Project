@@ -39,8 +39,8 @@ public class SimpleAssembler implements Assembler {
                     })
                     .map(line -> line.trim())
                     .collect(Collectors.partitioningBy(line -> readingCode));
-//			System.out.println("true List " + lists.get(true)); // these lines can be uncommented
-//			System.out.println("false List " + lists.get(false)); // for checking the code
+			System.out.println("true List " + lists.get(true));
+			System.out.println("false List " + lists.get(false)); 
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -52,7 +52,7 @@ public class SimpleAssembler implements Assembler {
                 .collect(Collectors.toList());
         List<String> outputData = lists.get(false).stream()
                 .map(line -> line.split("\\s+"))
-                .map(this::makeOutputCode)
+                .map(this::makeOutputData)
                 .collect(Collectors.toList());
         try (PrintWriter output = new PrintWriter(outputFileName)) {
             for (String s : outputCode) output.println(s);
