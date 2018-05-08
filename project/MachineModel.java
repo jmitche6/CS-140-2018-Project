@@ -257,7 +257,7 @@ public class MachineModel {
 		}
 		currentJob.setCurrentAcc(cpu.accumulator);
 		currentJob.setCurrentIP(cpu.instructionPointer);
-		jobs[i] = currentJob;
+		currentJob = jobs[i];
 		cpu.accumulator = currentJob.getCurrentAcc();
 		cpu.instructionPointer = currentJob.getCurrentIP();
 		cpu.memoryBase = currentJob.getStartmemoryIndex();

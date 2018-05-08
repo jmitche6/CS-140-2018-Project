@@ -60,10 +60,10 @@ public class CodeViewPanel implements Observer {
 	public void update(Observable arg0, Object arg1) {
 		if(arg1 != null && arg1.equals("Load Code")) {
 			int offset = model.getCurrentJob().getStartcodeIndex();
-			System.out.println("CODE SIZE " +  model.getCurrentJob().getCodeSize());
+			//System.out.println("CODE SIZE " +  model.getCurrentJob().getCodeSize());
 			for(int i = offset; 
 					i < offset + model.getCurrentJob().getCodeSize(); i++) {
-				System.out.println("CODE SIZE " +  model.getCurrentJob().getCodeSize());
+				//System.out.println("CODE SIZE " +  model.getCurrentJob().getCodeSize());
 				codeHex[i].setText(model.getHex(i));
 				codeDecimal[i].setText(model.getDecimal(i));
 			}	
