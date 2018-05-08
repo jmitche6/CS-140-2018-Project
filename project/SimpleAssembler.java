@@ -39,8 +39,8 @@ public class SimpleAssembler implements Assembler {
                     })
                     .map(line -> line.trim())
                     .collect(Collectors.partitioningBy(line -> readingCode));
-			System.out.println("true List " + lists.get(true));
-			System.out.println("false List " + lists.get(false)); 
+			//System.out.println("true List " + lists.get(true));
+			//System.out.println("false List " + lists.get(false)); 
         } catch (IOException e) {
             e.printStackTrace();
         }
